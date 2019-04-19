@@ -1,6 +1,6 @@
 from DataValidatorParser import DataValidatorParser
 from config import config
-
+from helpers import *
 
 class DataValidator():
 
@@ -21,21 +21,12 @@ class DataValidator():
     def getFaildAttributes(self):
         return list(set(list(map(lambda error: error['failed_attribute'], self._validateAllParsedRules()))))
 
-    # TODO move this to helpers class
-    @staticmethod
-    def get_classs(kls):
-        parts = kls.split('.')
-        module = ".".join(parts[:-1])
-        m = __import__(module)
-        for comp in parts[1:]:
-            m = getattr(m, comp)
-        return m
 
     def _validateAllParsedRules(self):
         ret = []
         rulesClasses = self.get_rules_classes()
         for parsedRule in self.parsedRules:
-            validationRuleClass = self.get_classs(rulesClasses[parsedRule['validationRule']])
+            validationRuleClass = get_classs(rulesClasses[parsedRule['validationRule']])
             validationRule = validationRuleClass(parsedRule['attributeName'], parsedRule['attributeData'],
                                                  parsedRule['args'])
             if (not validationRule.is_valid()):
