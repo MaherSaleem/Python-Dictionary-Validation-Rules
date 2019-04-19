@@ -22,14 +22,23 @@ class DataValidator():
     def getFaildAttributes(self):
         return list(set(list(map(lambda error: error['failed_attribute'], self._validateAllParsedRules()))))
 
+    # TODO move this to helpers class
+    @staticmethod
+    def get_classs(kls):
+        parts = kls.split('.')
+        module = ".".join(parts[:-1])
+        m = __import__(module)
+        for comp in parts[1:]:
+            m = getattr(m, comp)
+        return m
+
     def _validateAllParsedRules(self):
         ret = []
+        rulesClasses = self.get_rules_classes()
         for parsedRule in self.parsedRules:
-            if parsedRule['validationRule'] == 'string':
-                validationRule = StringRule(parsedRule['attributeName'], parsedRule['attributeData'],
-                                            parsedRule['args'])
-            else:
-                validationRule = MaxRule(parsedRule['attributeName'], parsedRule['attributeData'], parsedRule['args'])
+            validationRuleClass = self.get_classs(rulesClasses[parsedRule['validationRule']])
+            validationRule = validationRuleClass(parsedRule['attributeName'], parsedRule['attributeData'],
+                                                 parsedRule['args'])
             if (not validationRule.is_valid()):
                 ret.append({
                     'error_message': validationRule.get_validation_default_message(),
@@ -37,6 +46,25 @@ class DataValidator():
                     'failed_attribute': parsedRule['attributeName']
                 })
         return ret
+
+    def get_rules_classes(self):
+        rules = [
+            'array',
+            'date',
+            'email',
+            'in',
+            'max',
+            'min',
+            'number',
+            'phone',
+            'string',
+        ]
+        packageName = 'ValidationRules'
+        classesMapping = {}
+        for rule in rules:
+            className = rule.capitalize() + 'Rule'
+            classesMapping[rule] = packageName + '.' + className + '.' + className
+        return classesMapping
 
     '''
            Setters and getters
