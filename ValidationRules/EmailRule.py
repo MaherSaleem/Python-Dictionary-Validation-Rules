@@ -3,16 +3,16 @@ import re
 
 
 class EmailRule(ValidationRule):
-    def __init__(self, attributeName, attributeData, args=[]):
-        super().__init__(attributeName, attributeData, args)
+    def __init__(self, attribute_name, attribute_data, args=[]):
+        super().__init__(attribute_name, attribute_data, args)
 
-    def isValid(self):
+    def is_valid(self):
         EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
         return not not EMAIL_REGEX.match(self.email)
 
-    def getValidationDefaultMessage(self):
-        return "The %s field must be a valid Email" % self.get_attributeName()
+    def get_validation_default_message(self):
+        return "The %s field must be a valid Email" % self.get_attribute_name()
 
     @property
     def email(self):
-        return self.get_attributeData()
+        return self.get_attribute_data()

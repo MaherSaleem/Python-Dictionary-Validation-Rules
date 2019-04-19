@@ -3,15 +3,15 @@ import datetime
 
 
 class DateRule(ValidationRule):
-    def __init__(self, attributeName, attributeData, args=[]):
-        super().__init__(attributeName, attributeData, args)
+    def __init__(self, attribute_name, attribute_data, args=[]):
+        super().__init__(attribute_name, attribute_data, args)
 
-    def isValid(self):
+    def is_valid(self):
         try:
-            datetime.datetime.strptime(self.get_attributeData(), '%d-%m-%Y')
+            datetime.datetime.strptime(self.get_attribute_data(), '%d-%m-%Y')
             return True
         except ValueError:
             return False
 
-    def getValidationDefaultMessage(self):
-        return "The %s field must a valid date" % (self.get_attributeName())
+    def get_validation_default_message(self):
+        return "The %s field must a valid date" % (self.get_attribute_name())

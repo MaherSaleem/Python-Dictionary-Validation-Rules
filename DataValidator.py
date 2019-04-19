@@ -30,10 +30,10 @@ class DataValidator():
                                             parsedRule['args'])
             else:
                 validationRule = MaxRule(parsedRule['attributeName'], parsedRule['attributeData'], parsedRule['args'])
-            if (not validationRule.isValid()):
+            if (not validationRule.is_valid()):
                 ret.append({
-                    'error_message': validationRule.getValidationDefaultMessage(),
-                    'is_valid': validationRule.isValid(),
+                    'error_message': validationRule.get_validation_default_message(),
+                    'is_valid': validationRule.is_valid(),
                     'failed_attribute': parsedRule['attributeName']
                 })
         return ret

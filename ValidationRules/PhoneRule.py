@@ -3,16 +3,16 @@ import re
 
 
 class PhoneRule(ValidationRule):
-    def __init__(self, attributeName, attributeData, args=[]):
-        super().__init__(attributeName, attributeData, args)
+    def __init__(self, attribute_name, attribute_data, args=[]):
+        super().__init__(attribute_name, attribute_data, args)
 
-    def isValid(self):
+    def is_valid(self):
         phoneRegex = re.compile(r"\+.{12}")
-        return not not phoneRegex.match(self.phoneNumber)
+        return not not phoneRegex.match(self.phone_number)
 
-    def getValidationDefaultMessage(self):
-        return "The %s field must be a number" % self.get_attributeName()
+    def get_validation_default_message(self):
+        return "The %s field must be a number" % self.get_attribute_name()
 
     @property
-    def phoneNumber(self):
-        return self.get_attributeData()
+    def phone_number(self):
+        return self.get_attribute_data()
