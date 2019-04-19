@@ -9,5 +9,6 @@ config = {
         'number',
         'phone',
         'string',
+        'required'
     ],
 }

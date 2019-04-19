@@ -19,6 +19,7 @@ rules = {
     "creation_date": "date",
     'author.friends': 'array',
     'author.dob': 'date',
+    'author.haha': 'required'
 }
 customAttribute = {
     'title': 'New Title',

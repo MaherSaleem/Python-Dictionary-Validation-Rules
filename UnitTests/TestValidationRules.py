@@ -8,6 +8,7 @@ from ValidationRules.InRule import InRule
 from ValidationRules.DateRule import DateRule
 from ValidationRules.NumberRule import NumberRule
 from ValidationRules.PhoneRule import PhoneRule
+from ValidationRules.RequiredRule import RequiredRule
 
 
 class TestValidationRules(unittest.TestCase):
@@ -82,6 +83,18 @@ class TestValidationRules(unittest.TestCase):
     def testPhoneInValidCase(self):
         rule = PhoneRule('NumberRule', '+asdasdas')
         self.assertEqual(rule.is_valid(), False)
+
+    def testRequiredInValidCase1_None(self):
+        rule = RequiredRule('RequiredRule', None)
+        self.assertEqual(rule.is_valid(), False)
+
+    def testRequiredInValidCase2_EmptyString(self):
+        rule = RequiredRule('RequiredRule', '')
+        self.assertEqual(rule.is_valid(), False)
+
+    def testRequiredValidCase(self):
+        rule = RequiredRule('RequiredRule', 'Maher')
+        self.assertEqual(rule.is_valid(), True)
 
 
 if __name__ == '__main__':
