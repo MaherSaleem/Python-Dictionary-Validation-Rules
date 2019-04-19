@@ -6,3 +6,13 @@ def get_classs(kls):
         m = getattr(m, comp)
     return m
 
+
+def getDictValue(dict, key, default=None):
+    try:
+        tempDict = dict
+        keySplitted = key.split('.')
+        for keyLevel in keySplitted:
+            tempDict = tempDict[keyLevel]
+        return tempDict
+    except:
+        return default

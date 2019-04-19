@@ -1,4 +1,5 @@
 import DataValidator
+import helpers
 
 
 class DataValidatorParser():
@@ -17,7 +18,7 @@ class DataValidatorParser():
                 rule, args = self.getRuleAndArgs(validationRule)
                 self.parsedDataList.append({
                     'attributeName': shownAttributeName,
-                    'attributeData': data[attributeName],
+                    'attributeData': helpers.getDictValue(data, attributeName),
                     'validationRule': rule,
                     'args': args
                 })
