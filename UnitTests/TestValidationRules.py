@@ -4,6 +4,7 @@ from ValidationRules.MaxRule import MaxRule
 from ValidationRules.MinRule import MinRule
 from ValidationRules.EmailRule import EmailRule
 from ValidationRules.ArrayRule import ArrayRule
+from ValidationRules.InRule import InRule
 
 
 class TestValidationRules(unittest.TestCase):
@@ -45,6 +46,14 @@ class TestValidationRules(unittest.TestCase):
 
     def testArrayRuleInValidCase(self):
         rule = ArrayRule('ArrayRule', 'string')
+        self.assertEqual(rule.isValid(), False)
+
+    def testInRuleValidCase(self):
+        rule = InRule('InRule', 'maher', ['ahmad', 'ali', 'sammer', 'maher'])
+        self.assertEqual(rule.isValid(), True)
+
+    def testArrayRuleInValidCase(self):
+        rule = InRule('InRule', 'maher', ['ahmad', 'ali', 'sammer'])
         self.assertEqual(rule.isValid(), False)
 
 
