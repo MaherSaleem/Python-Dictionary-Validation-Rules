@@ -7,6 +7,7 @@ from ValidationRules.ArrayRule import ArrayRule
 from ValidationRules.InRule import InRule
 from ValidationRules.DateRule import DateRule
 from ValidationRules.NumberRule import NumberRule
+from ValidationRules.PhoneRule import PhoneRule
 
 
 class TestValidationRules(unittest.TestCase):
@@ -72,6 +73,14 @@ class TestValidationRules(unittest.TestCase):
 
     def testNumberInValidCase(self):
         rule = NumberRule('NumberRule', 'maher')
+        self.assertEqual(rule.isValid(), False)
+
+    def testPhoneValidCase(self):
+        rule = PhoneRule('NumberRule', '+970599123456')
+        self.assertEqual(rule.isValid(), True)
+
+    def testPhoneInValidCase(self):
+        rule = PhoneRule('NumberRule', '+asdasdas')
         self.assertEqual(rule.isValid(), False)
 
 
