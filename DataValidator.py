@@ -1,6 +1,5 @@
 from DataValidatorParser import DataValidatorParser
-from ValidationRules.StringRule import StringRule
-from ValidationRules.MaxRule import MaxRule
+from config import config
 
 
 class DataValidator():
@@ -48,17 +47,7 @@ class DataValidator():
         return ret
 
     def get_rules_classes(self):
-        rules = [
-            'array',
-            'date',
-            'email',
-            'in',
-            'max',
-            'min',
-            'number',
-            'phone',
-            'string',
-        ]
+        rules = config['supported_rules']
         packageName = 'ValidationRules'
         classesMapping = {}
         for rule in rules:
