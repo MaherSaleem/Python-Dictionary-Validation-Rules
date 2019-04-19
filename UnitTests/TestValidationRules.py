@@ -6,6 +6,7 @@ from ValidationRules.EmailRule import EmailRule
 from ValidationRules.ArrayRule import ArrayRule
 from ValidationRules.InRule import InRule
 from ValidationRules.DateRule import DateRule
+from ValidationRules.NumberRule import NumberRule
 
 
 class TestValidationRules(unittest.TestCase):
@@ -57,7 +58,6 @@ class TestValidationRules(unittest.TestCase):
         rule = InRule('InRule', 'maher', ['ahmad', 'ali', 'sammer'])
         self.assertEqual(rule.isValid(), False)
 
-
     def testDateValidCase(self):
         rule = DateRule('DateRule', '13-12-1995')
         self.assertEqual(rule.isValid(), True)
@@ -65,6 +65,15 @@ class TestValidationRules(unittest.TestCase):
     def testDateInValidCase(self):
         rule = DateRule('DateRule', '40-12-1995')
         self.assertEqual(rule.isValid(), False)
+
+    def testNumberValidCase(self):
+        rule = NumberRule('NumberRule', 6)
+        self.assertEqual(rule.isValid(), True)
+
+    def testNumberInValidCase(self):
+        rule = NumberRule('NumberRule', 'maher')
+        self.assertEqual(rule.isValid(), False)
+
 
 if __name__ == '__main__':
     unittest.main()
