@@ -21,17 +21,16 @@ class DataValidator():
     def getFaildAttributes(self):
         return list(set(list(map(lambda error: error['failed_attribute'], self._validateAllParsedRules()))))
 
-
     def _validateAllParsedRules(self):
         ret = []
         rulesClasses = self.get_rules_classes()
         for parsedRule in self.parsedRules:
             validationRuleClass = get_classs(rulesClasses[parsedRule['validationRule']])
             validationRule = validationRuleClass(parsedRule['attributeName'], parsedRule['attributeData'],
-                                                 parsedRule['args'])
+                                                 parsedRule['args'], parsedRule['errorMessage'])
             if (not validationRule.is_valid()):
                 ret.append({
-                    'error_message': validationRule.get_validation_default_message(),
+                    'error_message': validationRule.get_error_message(),
                     'is_valid': validationRule.is_valid(),
                     'failed_attribute': parsedRule['attributeName']
                 })

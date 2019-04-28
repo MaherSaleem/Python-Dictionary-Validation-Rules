@@ -25,7 +25,10 @@ customAttribute = {
     'title': 'New Title',
     'author.dob': 'Date of birth'
 }
-x = DataValidator(data, rules, customAttribute)
+customErrorMessages = {
+    'pages.max': 'You shouldn\'t exceed 30 for pages'
+}
+x = DataValidator(data, rules, customAttribute, customErrorMessages)
 print(x.getErrorMessages())
 print(x.isValidData())
 print(x.getFaildAttributes())
