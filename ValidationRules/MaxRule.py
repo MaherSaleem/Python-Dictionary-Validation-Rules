@@ -2,8 +2,8 @@ from ValidationRule import ValidationRule
 
 
 class MaxRule(ValidationRule):
-    def __init__(self, attribute_name, attribute_data, args=[]):
-        super().__init__(attribute_name, attribute_data, args)
+    def __init__(self, *args):
+        super().__init__(*args)
         self._args = list(map(int, self._args))
 
     def is_valid(self):

@@ -3,8 +3,8 @@ import re
 
 
 class EmailRule(ValidationRule):
-    def __init__(self, attribute_name, attribute_data, args=[]):
-        super().__init__(attribute_name, attribute_data, args)
+    def __init__(self, *args):
+        super().__init__(*args)
 
     def is_valid(self):
         EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
