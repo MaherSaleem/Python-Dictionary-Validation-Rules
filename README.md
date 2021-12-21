@@ -1,9 +1,9 @@
-# python-Dictionary-Validation-rules
+# Python Dictionary validation rules
 
-
+This package helps you to validate a dictionary based on some rules that you define.
+Check this exmple
+```bash
 from DataValidator import DataValidator
-
-
 data = {
     "title": 121,
     "author": {
@@ -35,3 +35,4 @@ x = DataValidator(data, rules, customAttribute, customErrorMessages)
 print(x.getErrorMessages())
 print(x.isValidData())
 print(x.getFaildAttributes())
+```
