@@ -1,4 +1,4 @@
-# Python Dictionary validation rules
+# Python Dictionary Validation Rules
 
 This package helps you to validate a dictionary based on some rules that you define.
 Check this exmple
